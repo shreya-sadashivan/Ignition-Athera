@@ -1,14 +1,21 @@
-import express from "express"
+// Import the express module
+const express = require('express');
 
-const app = express()
+// Import the body-parser module
+const bodyParser = require('body-parser');
+
+// Import the path module
+const path = require('path');
+
 const PORT = process.env.PORT || 3000
 
-// Middleware to parse JSON bodies
-app.use(express.json())
 
 // In-memory storage for IMU and GPS data
 const imuData = []
 const gpsData = []
+
+const app = express()
+app.use(bodyParser.json()); // Note: Body parser should return JSON data instead of URL encoded data.
 
 // POST /imu - Store IMU data
 app.post("/imu", (req, res) => {
